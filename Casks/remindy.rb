@@ -1,6 +1,6 @@
 cask "remindy" do
   version "2.0.0"
-  sha256 "6726b2e06c5f78adcc09fa287f7b7fcc0abaf53a7cc8a809906662bf558c0b58"
+  sha256 "134f33a642045feb7fd2df38d8e665505ae4ae57639e5bcde5a67b720882c8e5"
   url "https://github.com/FI-153/Remindy/releases/download/v2.0.0/Remindy.app.zip"
   name "Remindy"
   homepage "https://github.com/FI-153/Remindy"
