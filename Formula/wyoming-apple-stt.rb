@@ -3,9 +3,9 @@ class WyomingAppleStt < Formula
 
   desc "Wyoming protocol STT server backed by Apple's Speech framework"
   homepage "https://github.com/FI-153/wyoming-apple-stt"
-  url "https://github.com/FI-153/wyoming-apple-stt/releases/download/v1.0.0/wyoming-apple-stt-1.0.0.tar.gz"
-  version "1.0.0"
-  sha256 "be4a07f24dad1c727d8caca0b254708e9ac6c899e7e3f0b6a4972c1436d41d96"
+  url "https://github.com/FI-153/wyoming-apple-stt/releases/download/v1.0.1/wyoming-apple-stt-1.0.1.tar.gz"
+  version "1.0.1"
+  sha256 "a12547ac577a44fa479d00767141cb698df112cadcf834ffe691b2b9095bd266"
   license "MIT"
 
   depends_on "python@3.13"
@@ -34,7 +34,7 @@ class WyomingAppleStt < Formula
       if [[ -f "${CONF}" ]]; then
         source "${CONF}"
       fi
-      exec "#{libexec}/venv/bin/python" -m wyoming_apple_stt \\
+      exec "#{libexec}/bin/python" -m wyoming_apple_stt \\
         --uri "tcp://0.0.0.0:${PORT}" \\
         --apple-stt-bin "#{bin}/apple-stt"
     EOS
@@ -51,6 +51,6 @@ class WyomingAppleStt < Formula
   test do
     output = shell_output("#{bin}/apple-stt --list-languages")
     assert_match(/"en"/, output)
-    system libexec/"venv/bin/python", "-c", "import wyoming_apple_stt"
+    system libexec/"bin/python", "-c", "import wyoming_apple_stt"
   end
 end
