@@ -3,9 +3,9 @@ class WyomingAppleStt < Formula
 
   desc "Wyoming protocol STT server backed by Apple's Speech framework"
   homepage "https://github.com/FI-153/wyoming-apple-stt"
-  url "https://github.com/FI-153/wyoming-apple-stt/releases/download/v1.0.1/wyoming-apple-stt-1.0.1.tar.gz"
-  version "1.0.1"
-  sha256 "a12547ac577a44fa479d00767141cb698df112cadcf834ffe691b2b9095bd266"
+  url "https://github.com/FI-153/wyoming-apple-stt/releases/download/v1.0.2/wyoming-apple-stt-1.0.2.tar.gz"
+  version "1.0.2"
+  sha256 "ce13804795f226b2716486ea13a9430f934652237bb74aa3265f8b705d8dbf46"
   license "MIT"
 
   depends_on "python@3.13"
@@ -20,11 +20,14 @@ class WyomingAppleStt < Formula
     bin.install "apple-stt"
     virtualenv_install_with_resources
 
-    (etc/"wyoming-apple-stt.conf").write <<~EOS
-      # Wyoming Apple STT configuration
-      # Restart after editing: brew services restart wyoming-apple-stt
-      PORT=10300
-    EOS
+    conf = etc/"wyoming-apple-stt.conf"
+    unless conf.exist?
+      conf.write <<~EOS
+        # Wyoming Apple STT configuration
+        # Restart after editing: brew services restart wyoming-apple-stt
+        PORT=10300
+      EOS
+    end
 
     (libexec/"wyoming-apple-stt-run").write <<~EOS
       #!/bin/bash
