@@ -2,7 +2,6 @@ class ApfelHomeAssistant < Formula
   desc "Run apfel pre-configured as a Home Assistant conversation backend"
   homepage "https://github.com/FI-153/apfel-home-assistant"
   url "https://github.com/FI-153/apfel-home-assistant/releases/download/v0.1.0/apfel-home-assistant-0.1.0.tar.gz"
-  version "0.1.0"
   sha256 "af52cc8a51c08624dee83d89e5dcda4228d75fe09a04a26a9871f5aeb46d5820"
   license "MIT"
 
@@ -44,6 +43,8 @@ class ApfelHomeAssistant < Formula
 
   service do
     run [opt_libexec/"apfel-home-assistant-run"]
+    environment_variables APFEL_HA_CONF: etc/"apfel-home-assistant.conf",
+                          PATH:          "#{HOMEBREW_PREFIX}/bin:/usr/bin:/bin"
     keep_alive true
     log_path var/"log/apfel-home-assistant.log"
     error_log_path var/"log/apfel-home-assistant.log"
