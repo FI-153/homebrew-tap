@@ -6,7 +6,7 @@ class ApfelHomeAssistant < Formula
   sha256 "af52cc8a51c08624dee83d89e5dcda4228d75fe09a04a26a9871f5aeb46d5820"
   license "MIT"
 
-  depends_on "arthur-ficial/tap/apfel"
+  depends_on "apfel"
   depends_on macos: :tahoe
 
   def install
