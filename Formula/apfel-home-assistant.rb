@@ -1,8 +1,8 @@
 class ApfelHomeAssistant < Formula
   desc "Run apfel pre-configured as a Home Assistant conversation backend"
   homepage "https://github.com/FI-153/apfel-home-assistant"
-  url "https://github.com/FI-153/apfel-home-assistant/releases/download/v0.1.1/apfel-home-assistant-0.1.1.tar.gz"
-  sha256 "4b4f18420c89860b6a509d77d035c3619cf64a26284a1b37c98cc38fd5f43e82"
+  url "https://github.com/FI-153/apfel-home-assistant/releases/download/v0.2.0/apfel-home-assistant-0.2.0.tar.gz"
+  sha256 "333e167dd71d5f9da5c18405c6ca5deea34481a5d573808f406d5c12ba8d0398"
   license "MIT"
 
   depends_on "apfel"
@@ -36,8 +36,11 @@ class ApfelHomeAssistant < Formula
       Then:
         brew services start apfel-home-assistant
 
-      `setup` prints the Base URL, API Key, and Model to paste into Home Assistant's
-      "OpenAI Extended Conversation" integration.
+      `setup` prints the values to paste into Home Assistant.
+      Recommended: "Apfel AI" integration (HACS custom repo) — conversation + AI Task.
+      Legacy: "OpenAI Extended Conversation" integration — conversation only.
+
+      Details: apfel-home-assistant show-config
     EOS
   end
 
