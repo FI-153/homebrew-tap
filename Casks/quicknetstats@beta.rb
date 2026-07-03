@@ -1,8 +1,8 @@
 cask "quicknetstats@beta" do
-  version "2.2.0-Beta-2"
-  sha256 "223a2c6e7f7361f6000064a7d6887eb092e75b6ac3a2d336a334cb02630ad400"
+  version "2.2.1-Beta-1"
+  sha256 "4d43ee3926c6febe016c829a0fe6cb8fad257037c64e9f7e3606080eb5f6e5a6"
 
-  url "https://github.com/FI-153/QuickNetStats/releases/download/V.2.2.0-Beta-2/QuickNetStats.app.zip"
+  url "https://github.com/FI-153/QuickNetStats/releases/download/V.2.2.1-Beta-1/QuickNetStats.app.zip"
   name "QuickNetStats (Beta)"
   desc "Development version of QuickNetStats"
   homepage "https://github.com/FI-153/QuickNetStats"
