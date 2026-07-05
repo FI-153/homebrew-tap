@@ -3,9 +3,9 @@ class WyomingAppleStt < Formula
 
   desc "Wyoming protocol STT server backed by Apple's Speech framework"
   homepage "https://github.com/FI-153/wyoming-apple-stt"
-  url "https://github.com/FI-153/wyoming-apple-stt/releases/download/v1.0.2/wyoming-apple-stt-1.0.2.tar.gz"
-  version "1.0.2"
-  sha256 "ce13804795f226b2716486ea13a9430f934652237bb74aa3265f8b705d8dbf46"
+  url "https://github.com/FI-153/wyoming-apple-stt/releases/download/v1.1.0/wyoming-apple-stt-1.1.0.tar.gz"
+  version "1.1.0"
+  sha256 "e8a5d7acb912f3ce30bf6167ea88cdac0bb6fd8bac9980d33de7a056947a5ac9"
   license "MIT"
 
   depends_on "python@3.13"
@@ -26,6 +26,9 @@ class WyomingAppleStt < Formula
         # Wyoming Apple STT configuration
         # Restart after editing: brew services restart wyoming-apple-stt
         PORT=10300
+        LANGUAGE=en
+        # Extra flags passed to the server, e.g. "--debug" or "--timeout 60"
+        EXTRA_ARGS=""
       EOS
     end
 
@@ -33,13 +36,17 @@ class WyomingAppleStt < Formula
       #!/bin/bash
       set -euo pipefail
       PORT=10300
+      LANGUAGE=en
+      EXTRA_ARGS=""
       CONF="#{etc}/wyoming-apple-stt.conf"
       if [[ -f "${CONF}" ]]; then
         source "${CONF}"
       fi
       exec "#{libexec}/bin/python" -m wyoming_apple_stt \\
         --uri "tcp://0.0.0.0:${PORT}" \\
-        --apple-stt-bin "#{bin}/apple-stt"
+        --language "${LANGUAGE}" \\
+        --apple-stt-bin "#{bin}/apple-stt" \\
+        ${EXTRA_ARGS}
     EOS
     chmod 0755, libexec/"wyoming-apple-stt-run"
   end
