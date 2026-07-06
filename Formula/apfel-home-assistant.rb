@@ -1,8 +1,8 @@
 class ApfelHomeAssistant < Formula
   desc "Run apfel pre-configured as a Home Assistant conversation backend"
   homepage "https://github.com/FI-153/apfel-home-assistant"
-  url "https://github.com/FI-153/apfel-home-assistant/releases/download/v1.0.0/apfel-home-assistant-1.0.0.tar.gz"
-  sha256 "da8ff9d9edd9f8914a88b0b880c853641312b95065ac7540552c83d31aedfbf0"
+  url "https://github.com/FI-153/apfel-home-assistant/releases/download/v1.1.0/apfel-home-assistant-1.1.0.tar.gz"
+  sha256 "853e9d98a9804f6eb2fe4c54bf97119323a8b2a3c1a543f06b8d9ebef5aa1c76"
   license "MIT"
 
   depends_on "apfel"
@@ -48,7 +48,7 @@ class ApfelHomeAssistant < Formula
     run [opt_libexec/"apfel-home-assistant-run"]
     environment_variables APFEL_HA_CONF: etc/"apfel-home-assistant.conf",
                           PATH:          "#{HOMEBREW_PREFIX}/bin:/usr/bin:/bin"
-    keep_alive true
+    keep_alive crashed: true
     log_path var/"log/apfel-home-assistant.log"
     error_log_path var/"log/apfel-home-assistant.log"
   end
@@ -57,5 +57,11 @@ class ApfelHomeAssistant < Formula
     assert_match "Usage: apfel-home-assistant",
                  shell_output("#{bin}/apfel-home-assistant --help")
     assert_predicate libexec/"apfel-home-assistant-run", :executable?
+
+    ENV["APFEL_HA_CONF"] = testpath/"apfel-home-assistant.conf"
+    system bin/"apfel-home-assistant", "setup"
+    assert_match(/^TOKEN=[0-9a-f]{64}$/, (testpath/"apfel-home-assistant.conf").read)
+    assert_match "apple-foundationmodel",
+                 shell_output("#{bin}/apfel-home-assistant show-config")
   end
 end
