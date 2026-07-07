@@ -1,8 +1,8 @@
 class ApfelHomeAssistant < Formula
   desc "Run apfel pre-configured as a Home Assistant conversation backend"
   homepage "https://github.com/FI-153/apfel-home-assistant"
-  url "https://github.com/FI-153/apfel-home-assistant/releases/download/v1.1.0/apfel-home-assistant-1.1.0.tar.gz"
-  sha256 "853e9d98a9804f6eb2fe4c54bf97119323a8b2a3c1a543f06b8d9ebef5aa1c76"
+  url "https://github.com/FI-153/apfel-home-assistant/releases/download/v1.1.1/apfel-home-assistant-1.1.1.tar.gz"
+  sha256 "b3bfa6da33c9c732487be90cb8d417a10f523d41abe4ba60ea1893e199ee3225"
   license "MIT"
 
   depends_on "apfel"
