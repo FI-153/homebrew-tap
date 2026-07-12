@@ -3,9 +3,9 @@ class WyomingAppleStt < Formula
 
   desc "Wyoming protocol STT server backed by Apple's Speech framework"
   homepage "https://github.com/FI-153/wyoming-apple-stt"
-  url "https://github.com/FI-153/wyoming-apple-stt/releases/download/v1.1.0/wyoming-apple-stt-1.1.0.tar.gz"
-  version "1.1.0"
-  sha256 "e8a5d7acb912f3ce30bf6167ea88cdac0bb6fd8bac9980d33de7a056947a5ac9"
+  url "https://github.com/FI-153/wyoming-apple-stt/releases/download/v1.2.0/wyoming-apple-stt-1.2.0.tar.gz"
+  version "1.2.0"
+  sha256 "932bafe0c9a43546c66f01f91752858542cea91fe134bae4043af1de4f9fef0d"
   license "MIT"
 
   depends_on "python@3.13"
