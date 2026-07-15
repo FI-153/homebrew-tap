@@ -3,9 +3,9 @@ class WyomingAppleSttBeta < Formula
 
   desc "Wyoming protocol STT server backed by Apple's Speech framework"
   homepage "https://github.com/FI-153/wyoming-apple-stt"
-  url "https://github.com/FI-153/wyoming-apple-stt/releases/download/v2.0.0-beta1/wyoming-apple-stt-2.0.0-beta1.tar.gz"
-  version "2.0.0-beta1"
-  sha256 "432063849fdb05f4d57c0dfbc88e9997f08b8368abc6a8a0f91073c43aec35dd"
+  url "https://github.com/FI-153/wyoming-apple-stt/releases/download/v2.0.0-beta2/wyoming-apple-stt-2.0.0-beta2.tar.gz"
+  version "2.0.0-beta2"
+  sha256 "4f8d1e1dd62a652e8d8a7d3f1d294d23b6b48000997b1ddb6edf1ada4f0533ea"
   license "MIT"
 
   depends_on macos: :sequoia
