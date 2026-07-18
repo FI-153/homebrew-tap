@@ -3,13 +3,14 @@ class WyomingAppleSpeech < Formula
 
   desc "Wyoming STT + TTS server backed by Apple's Speech framework and Siri voices"
   homepage "https://github.com/FI-153/wyoming-apple-speech"
-  url "https://github.com/FI-153/wyoming-apple-speech/releases/download/v2.0.1/wyoming-apple-speech-2.0.1.tar.gz"
-  version "2.0.1"
-  sha256 "65e32247550bc3bf6ea3ae60d9c047dd52d5264de7fe2731c1c4faade2395733"
+  url "https://github.com/FI-153/wyoming-apple-speech/releases/download/v2.0.2/wyoming-apple-speech-2.0.2.tar.gz"
+  version "2.0.2"
+  sha256 "5b93326c273ff257731421a43cb8accb66dc16d9465a1faef21b98dafc28e250"
   license "MIT"
 
   depends_on macos: :sequoia
   depends_on "python@3.13"
+
 
   resource "wyoming" do
     url "https://files.pythonhosted.org/packages/c5/ab/8984e755731fac96405b3ecc2236887855120afb9760f829291bd618c26d/wyoming-1.8.0.tar.gz"
