@@ -1,0 +1,72 @@
+class WyomingAppleSpeech < Formula
+  include Language::Python::Virtualenv
+
+  desc "Wyoming STT + TTS server backed by Apple's Speech framework and Siri voices"
+  homepage "https://github.com/FI-153/wyoming-apple-speech"
+  url "https://github.com/FI-153/wyoming-apple-speech/releases/download/v2.0.0/wyoming-apple-speech-2.0.0.tar.gz"
+  version "2.0.0"
+  sha256 "20aab6fcd5ebac395da4868b1e53f9a7c35d9645459148e722f37647de7ff617"
+  license "MIT"
+
+  depends_on macos: :sequoia
+  depends_on "python@3.13"
+
+  conflicts_with "wyoming-apple-speech-beta", because: "both install the same binaries and launchd service"
+
+  resource "wyoming" do
+    url "https://files.pythonhosted.org/packages/c5/ab/8984e755731fac96405b3ecc2236887855120afb9760f829291bd618c26d/wyoming-1.8.0.tar.gz"
+    sha256 "90c16c9fb7e90cbce277032806b7816e6c631812393206a73298f4ad4ffcdb76"
+  end
+
+  def install
+    bin.install "apple-stt"
+    bin.install "apple-tts"
+    virtualenv_install_with_resources
+
+    conf = etc/"wyoming-apple-speech.conf"
+    unless conf.exist?
+      conf.write <<~EOS
+        # Wyoming Apple Speech configuration
+        # Restart after editing: brew services restart wyoming-apple-speech
+        PORT=10300
+        LANGUAGE=en
+        # Extra flags passed to the server, e.g. "--debug" or "--timeout 60"
+        EXTRA_ARGS=""
+      EOS
+    end
+
+    (libexec/"wyoming-apple-speech-run").write <<~EOS
+      #!/bin/bash
+      set -euo pipefail
+      PORT=10300
+      LANGUAGE=en
+      EXTRA_ARGS=""
+      CONF="#{etc}/wyoming-apple-speech.conf"
+      if [[ -f "${CONF}" ]]; then
+        source "${CONF}"
+      fi
+      exec "#{libexec}/bin/python" -m wyoming_apple_speech \\
+        --uri "tcp://0.0.0.0:${PORT}" \\
+        --language "${LANGUAGE}" \\
+        --apple-stt-bin "#{bin}/apple-stt" \\
+        --apple-tts-bin "#{bin}/apple-tts" \\
+        ${EXTRA_ARGS}
+    EOS
+    chmod 0755, libexec/"wyoming-apple-speech-run"
+  end
+
+  service do
+    run [opt_libexec/"wyoming-apple-speech-run"]
+    keep_alive true
+    log_path var/"log/wyoming-apple-speech.log"
+    error_log_path var/"log/wyoming-apple-speech.log"
+  end
+
+  test do
+    output = shell_output("#{bin}/apple-stt --list-languages")
+    assert_match(/"en"/, output)
+    tts_output = shell_output("#{bin}/apple-tts --list-voices")
+    assert_match(/\A\[/, tts_output)
+    system libexec/"bin/python", "-c", "import wyoming_apple_speech"
+  end
+end
